@@ -8,7 +8,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
-            val list = ContactListFragment()
+            val list = ContactListFragment.newInstance()
             supportFragmentManager.beginTransaction().addToBackStack(null)
                 .replace(R.id.container, list).commit()
         }

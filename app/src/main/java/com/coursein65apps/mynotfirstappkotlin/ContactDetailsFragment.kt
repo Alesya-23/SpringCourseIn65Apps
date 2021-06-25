@@ -4,23 +4,24 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.item_fragment_details.*
+import com.coursein65apps.mynotfirstappkotlin.databinding.ItemFragmentDetailsBinding
 
 class ContactDetailsFragment : Fragment(R.layout.item_fragment_details) {
-    private lateinit var viewBinding: ContactDetailsFragmentBinding
+    private lateinit var viewBinding: ItemFragmentDetailsBinding
+    private var ID_ARGUMENT = "ID"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding = ContactDetailsFragmentBinding.bind(layoutInflater)
-        val id: Int? = arguments?.getInt("ID", 0)
-        activity?.title = "Детали контактов"
+        viewBinding = ItemFragmentDetailsBinding.bind(view)
+        requireActivity().title = getString(R.string.details_contact_title)
     }
 
-    fun newInstance(key: String?, value: Int): ContactDetailsFragment {
-        val fragment = ContactDetailsFragment()
-        val bundle = bundleOf()
-        bundle.putInt(key, value)
-        fragment.arguments = bundle
-        return fragment
+    companion object {
+        fun newInstance(contactId: Int) = ContactDetailsFragment().apply {
+            this.arguments = bundleOf(
+                ID_ARGUMENT to contactId
+            )
+        }
     }
+
 }

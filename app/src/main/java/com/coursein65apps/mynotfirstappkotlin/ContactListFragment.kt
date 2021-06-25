@@ -1,41 +1,38 @@
 package com.coursein65apps.mynotfirstappkotlin
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.coursein65apps.mynotfirstappkotlin.data.Contact
-import com.coursein65apps.mynotfirstappkotlin.data.ContactStorage
-import kotlinx.android.synthetic.main.fragment_list_contact.*
-import kotlinx.android.synthetic.main.fragment_list_contact.view.*
+import com.coursein65apps.mynotfirstappkotlin.databinding.FragmentListContactBinding
 
-class ContactListFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_list_contact, container, false)
-        activity?.title = "Список контактов"
-        val item = view.findViewById<View>(R.id.item_list)
-        item.setOnClickListener {
-            onСlick()
+class ContactListFragment : Fragment(R.layout.fragment_list_contact) {
+    private lateinit var viewListBinding: FragmentListContactBinding
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewListBinding = FragmentListContactBinding.bind(view)
+        viewListBinding.itemList.itemFragmentContactListRoot.setOnClickListener {
+            onClick()
         }
-        return view
+        requireActivity().title = getString(R.string.list_contact_title)
     }
 
-    private fun onСlick() {
-        val detailContact = ContactDetailsFragment()
-        val bundle = Bundle()
-        bundle.putInt("ID", 0)
-        detailContact.arguments = bundle
-        fragmentManager?.beginTransaction()?.addToBackStack(null)
-            ?.replace(R.id.container, detailContact)?.commit()
+    private fun onClick() {
+        val contactId = 0
+        val detailContact = ContactDetailsFragment.newInstance(contactId)
+        requireActivity().supportFragmentManager.beginTransaction()
+            .addToBackStack(ContactDetailsFragment::class.java.simpleName)
+            .replace(R.id.container, detailContact)
+            .commit()
+    }
+
+    companion object {
+        fun newInstance(): ContactListFragment {
+            val args = Bundle()
+            val fragment = ContactListFragment()
+            fragment.arguments = args
+            return fragment
+        }
     }
 }
