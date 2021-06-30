@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MyNotFirstAppKotlin</string>
+    <string name="telephone">894734834</string>
+    <string name="name">Name</string>
+    <string name="email_one">email_one</string>
+    <string name="email_two">email_two</string>
+    <string name="description_contact">Описание контакта</string>
+    <string name="details_contact_title">Детали контактов</string>
+    <string name="list_contact_title">Список контактов</string>
 </resources>
