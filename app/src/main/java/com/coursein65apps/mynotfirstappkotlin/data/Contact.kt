@@ -2,7 +2,6 @@ package com.coursein65apps.mynotfirstappkotlin.data
 
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
-import androidx.annotation.NonNull
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

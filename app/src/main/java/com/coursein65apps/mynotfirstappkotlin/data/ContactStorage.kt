@@ -27,4 +27,21 @@ object ContactStorage {
             )
         )
     }
+
+    fun getContactId(id: Int): Contact {
+        for (contact: Contact in getContactList())
+            if (contact.id == id) {
+                return contact
+            }
+        return Contact(
+            1,
+            "Alexey Ivanov",
+            R.drawable.donut,
+            "89605678988",
+            "89605678984",
+            "ivanov@mail.ru",
+            "al_iv@rambler.com",
+            "engineer"
+        )
+    }
 }
