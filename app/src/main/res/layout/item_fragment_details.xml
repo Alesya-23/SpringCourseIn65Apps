@@ -90,4 +90,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email_two" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/date_birthday"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="дата рождения"
+        android:textSize="16sp"
+        android:layout_margin="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintEnd_toStartOf="@id/button_notify"/>
+
+    <Button
+        android:id="@+id/button_notify"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/notificate"
+        android:textSize="12sp"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/date_birthday"
+        app:layout_constraintTop_toBottomOf="@id/description" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

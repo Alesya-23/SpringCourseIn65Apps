@@ -12,10 +12,22 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".ContactService"
+            android:exported="true"></service>
+        <receiver
+            android:name=".ContactBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="contact.broadcast" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
