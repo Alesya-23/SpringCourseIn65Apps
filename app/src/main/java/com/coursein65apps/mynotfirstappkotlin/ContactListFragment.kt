@@ -25,11 +25,13 @@ class ContactListFragment : Fragment(R.layout.fragment_list_contact) {
 
     private fun onClick() {
         val contactId = 0
-        val detailContact = ContactDetailsFragment.newInstance(contactId)
-        requireActivity().supportFragmentManager.beginTransaction()
-            .addToBackStack(ContactDetailsFragment::class.java.simpleName)
-            .replace(R.id.container, detailContact)
-            .commit()
+        val detailContact = ContactDetailsFragment.newInstance(contactId, false)
+        if (detailContact != null) {
+            requireActivity().supportFragmentManager.beginTransaction()
+                    .addToBackStack(ContactDetailsFragment::class.java.simpleName)
+                    .replace(R.id.container, detailContact)
+                    .commit()
+        }
     }
 
     companion object {

@@ -15,10 +15,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service
-            android:name=".ContactService"
-            android:exported="true">
-        </service>
+        <service android:name=".ContactService" />
+        <receiver android:name=".ContactBroadcastReceiver">
+            <intent-filter>
+                <action android:name="contact.broadcast" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

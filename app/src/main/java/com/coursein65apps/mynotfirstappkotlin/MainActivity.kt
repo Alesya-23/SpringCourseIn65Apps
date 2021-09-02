@@ -5,18 +5,27 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
+private const val CONTACT_DETAIL_ID = "CONTACT_DETAIL_ID"
+
 class MainActivity : AppCompatActivity() {
     private var mService: ContactService = ContactService()
+    private var mBroadcastReceiver: ContactBroadcastReceiver = ContactBroadcastReceiver()
+    private var isContactBirthday = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
-            val list = ContactListFragment.newInstance()
-            supportFragmentManager.beginTransaction()
-                    .addToBackStack(null)
-                    .replace(R.id.container, list)
-                    .commit()
+            checkNotification()
+            if (!isContactBirthday) {
+                val list = ContactListFragment.newInstance()
+                supportFragmentManager.beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.container, list)
+                        .commit()
+            } else {
+                openDetailsFragment()
+            }
         }
     }
 
@@ -38,5 +47,24 @@ class MainActivity : AppCompatActivity() {
 
     fun getContactService(): ContactService {
         return mService
+    }
+
+    fun getContactBroadcastReceiver(): ContactBroadcastReceiver {
+        return mBroadcastReceiver
+    }
+
+    private fun checkNotification() {
+        val contactDetailId = intent.getIntExtra(CONTACT_DETAIL_ID, -1)
+        if (contactDetailId != -1) {
+            isContactBirthday = true
+        }
+    }
+
+    private fun openDetailsFragment() {
+        val contactDetailsFragment = ContactDetailsFragment.newInstance(0, buttonNotifyState = true)
+        this.supportFragmentManager.beginTransaction()
+                .replace(R.id.container, contactDetailsFragment)
+                .addToBackStack(ContactListFragment::class.java.simpleName)
+                .commit()
     }
 }
