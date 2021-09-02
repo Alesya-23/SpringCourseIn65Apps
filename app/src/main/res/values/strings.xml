@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyNotFirstAppKotlin</string>
+    <string name="app_name">ContactApp</string>
     <string name="telephone">894734834</string>
     <string name="name">Name</string>
     <string name="email_one">email_one</string>
@@ -7,5 +7,14 @@
     <string name="description_contact">Описание контакта</string>
     <string name="details_contact_title">Детали контактов</string>
     <string name="list_contact_title">Список контактов</string>
-    <string name="notificate">Напоминать</string>
+    <string name="notificate">Включить напоминания</string>
+    <string name="channel_name">День рождения</string>
+    <string name="channel_description">День рождения</string>
+    <string name="description_notification">Notification birthday channel</string>
+    <string name="name_notification_channel">Notification birthday channel</string>
+    <string name="title_notification">Напоминание о дне рождения</string>
+    <string name="on_notification">Включить напоминания</string>
+    <string name="off_notification">Выключить напоминания</string>
+    <string name="text_notification">Сегодня день рождения у </string>
+    <string name="day_birthday">дата рождения</string>
 </resources>
