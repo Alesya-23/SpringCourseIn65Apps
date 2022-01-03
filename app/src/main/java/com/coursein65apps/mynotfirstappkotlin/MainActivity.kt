@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.coursein65apps.mynotfirstappkotlin.data.ContactStorage
 
 private const val CONTACT_DETAIL_ID = "CONTACT_DETAIL_ID"
 
@@ -20,9 +21,9 @@ class MainActivity : AppCompatActivity() {
             if (!isContactBirthday) {
                 val list = ContactListFragment.newInstance()
                 supportFragmentManager.beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.container, list)
-                        .commit()
+                    .addToBackStack(null)
+                    .replace(R.id.container, list)
+                    .commit()
             } else {
                 openDetailsFragment()
             }
@@ -63,8 +64,8 @@ class MainActivity : AppCompatActivity() {
     private fun openDetailsFragment() {
         val contactDetailsFragment = ContactDetailsFragment.newInstance(0, buttonNotifyState = true)
         this.supportFragmentManager.beginTransaction()
-                .replace(R.id.container, contactDetailsFragment)
-                .addToBackStack(ContactListFragment::class.java.simpleName)
-                .commit()
+            .replace(R.id.container, contactDetailsFragment)
+            .addToBackStack(ContactListFragment::class.java.simpleName)
+            .commit()
     }
 }

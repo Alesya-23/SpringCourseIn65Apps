@@ -17,4 +17,6 @@
     <string name="off_notification">Выключить напоминания</string>
     <string name="text_notification">Сегодня день рождения у </string>
     <string name="day_birthday">дата рождения</string>
+    <string name="the_field_contact_is_empty">Отсутсвует</string>
+    <string name="required_install_permission">Требуется установить разрешения</string>
 </resources>
