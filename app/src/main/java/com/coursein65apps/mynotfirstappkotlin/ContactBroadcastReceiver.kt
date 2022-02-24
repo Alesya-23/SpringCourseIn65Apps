@@ -32,13 +32,14 @@ class ContactBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         contactDetailId = intent.getIntExtra(ID, -1)
         nameContact = intent.getStringExtra(TEXT_NOTIFICATION).orEmpty()
-        notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(
-                    CHANNEL_ID,
-                    context.getString(R.string.name_notification_channel),
-                    importance
+                CHANNEL_ID,
+                context.getString(R.string.name_notification_channel),
+                importance
             ).apply {
                 description = context.getString(R.string.description_notification)
             }
@@ -56,12 +57,18 @@ class ContactBroadcastReceiver : BroadcastReceiver() {
         }
         val pendingIntent = PendingIntent.getActivity(context, 0, intentReply, FLAG_UPDATE_CURRENT)
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.icon_notificate)
-                .setContentTitle(context.getString(R.string.title_notification))
-                .setContentText(String.format("%s %s", context.getString(R.string.text_notification), nameContact))
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setAutoCancel(true)
-                .setContentIntent(pendingIntent)
+            .setSmallIcon(R.drawable.icon_notificate)
+            .setContentTitle(context.getString(R.string.title_notification))
+            .setContentText(
+                String.format(
+                    "%s %s",
+                    context.getString(R.string.text_notification),
+                    nameContact
+                )
+            )
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
+            .setContentIntent(pendingIntent)
         notificationManager.notify(contactDetailId, builder.build())
         return intentReply
     }
@@ -69,13 +76,14 @@ class ContactBroadcastReceiver : BroadcastReceiver() {
     private fun createAlarm(context: Context, intentReply: Intent) {
         val calendar: Calendar = Calendar.getInstance()
         calendar.timeInMillis = System.currentTimeMillis()
-        val pendingIntentRepeatNotification = PendingIntent.getBroadcast(context, contactDetailId, intentReply, FLAG_UPDATE_CURRENT)
+        val pendingIntentRepeatNotification =
+            PendingIntent.getBroadcast(context, contactDetailId, intentReply, FLAG_UPDATE_CURRENT)
         val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
         alarmManager.setRepeating(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                INTERVAL_DAY * INTERVAL_YEAR,
-                pendingIntentRepeatNotification
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            INTERVAL_DAY * INTERVAL_YEAR,
+            pendingIntentRepeatNotification
         )
     }
 
@@ -83,9 +91,9 @@ class ContactBroadcastReceiver : BroadcastReceiver() {
         val contactDetailId = intent.getIntExtra(ID, -1)
         val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
         val pendingIntent = PendingIntent.getBroadcast(
-                context,
-                contactDetailId, intent,
-                FLAG_UPDATE_CURRENT
+            context,
+            contactDetailId, intent,
+            FLAG_UPDATE_CURRENT
         )
         alarmManager.cancel(pendingIntent)
     }

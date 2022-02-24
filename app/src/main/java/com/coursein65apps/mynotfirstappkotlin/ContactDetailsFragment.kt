@@ -1,6 +1,7 @@
 package com.coursein65apps.mynotfirstappkotlin
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
@@ -37,12 +38,13 @@ class ContactDetailsFragment : Fragment(R.layout.item_fragment_details) {
     }
 
     companion object {
-        fun newInstance(contactId: Int, buttonNotifyState: Boolean) = ContactDetailsFragment().apply {
-            this.arguments = bundleOf(
-                    ID_ARGUMENT to contactId,
-                    BUTTON_STATE to buttonNotifyState,
-            )
-        }
+        fun newInstance(contactId: Int, buttonNotifyState: Boolean) =
+                ContactDetailsFragment().apply {
+                    this.arguments = bundleOf(
+                            ID_ARGUMENT to contactId,
+                            BUTTON_STATE to buttonNotifyState,
+                    )
+                }
     }
 
     private fun getPersonContact(id: Int) {
@@ -62,7 +64,7 @@ class ContactDetailsFragment : Fragment(R.layout.item_fragment_details) {
             emailTwo.text = contact.emailTwo
             telephoneOne.text = contact.telephoneOne
             telephoneTwo.text = contact.telephoneTwo
-            contact.photoContact.let { photoContact.setImageResource(it) }
+            contact.photoContact.let { photoContact.setImageBitmap(it) }
             dateBirthday.text = contact.dateBirthday
         }
     }
@@ -80,14 +82,18 @@ class ContactDetailsFragment : Fragment(R.layout.item_fragment_details) {
         intent.putExtra(ID, contactDetailIdArgument)
         if (buttonNotifyState == true) {
             viewBinding.buttonNotify.text = getString(R.string.on_notification)
-            (activity as MainActivity).getContactBroadcastReceiver().cancelAlarmNotificationContact((activity as MainActivity).applicationContext, intent)
+            (activity as MainActivity).getContactBroadcastReceiver().cancelAlarmNotificationContact(
+                    (activity as MainActivity).applicationContext,
+                    intent
+            )
             buttonNotifyState = false
             //отключаем опцию
         } else {
             // включаем
             viewBinding.buttonNotify.text = getString(R.string.off_notification)
             intent.putExtra(TEXT_NOTIFICATION, viewBinding.fullName.text)
-            (activity as MainActivity).getContactBroadcastReceiver().onReceive((activity as MainActivity).applicationContext, intent)
+            (activity as MainActivity).getContactBroadcastReceiver()
+                    .onReceive((activity as MainActivity).applicationContext, intent)
             buttonNotifyState = true
         }
     }
